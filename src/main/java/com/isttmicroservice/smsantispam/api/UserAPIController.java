@@ -36,6 +36,7 @@ public class UserAPIController {
 	@PostMapping("/")
 //	 @PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseDTO<UserDTO> create(@ModelAttribute @Valid UserDTO userDTO) throws IOException {
+
 		userService.create(userDTO);
 		return ResponseDTO.<UserDTO>builder().code(String.valueOf(HttpStatus.OK.value())).data(userDTO).build();
 	}
@@ -66,7 +67,7 @@ public class UserAPIController {
 	}
 
 	@DeleteMapping("/{id}")
-	// @PreAuthorize("hasRole('ROLE_ADMIN')")
+	 @PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseDTO<Void> delete(@PathVariable(value = "id") int id) {
 
 		userService.delete(id);
